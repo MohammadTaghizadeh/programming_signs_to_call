@@ -1,6 +1,7 @@
 # programming_signs_to_call
 A Comprehensive Reference for Programming Character Naming, Equivalence, and Inventive Terminology
-<img width="1722" height="2979" alt="image" src="https://github.com/user-attachments/assets/28562c61-f4ca-4f16-a63e-117dd2d87e61" />
+<img width="1722" height="2414" alt="image" src="https://github.com/user-attachments/assets/929769a9-1112-4cdf-8326-8dfe886a2069" />
+
 # مرجع کاراکترهای برنامه‌نویسی
 
 این پروژه شامل یک جدول مرجع تعاملی و زیبا برای **نام‌گذاری، معادل‌سازی و نام‌های ابتکاری کاراکترهای برنامه‌نویسی** است.
