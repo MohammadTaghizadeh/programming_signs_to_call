@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>نام‌گذاری، معادل‌سازی و نام‌های ابتکاری کاراکترهای برنامه‌نویسی</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 30px 15px;
+    color: #e2e8f0;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1700px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    overflow: hidden;
+  }
+
+  header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #db2777 100%);
+    padding: 35px 25px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #facc15, #f472b6, #38bdf8);
+  }
+
+  header h1 {
+    font-size: 1.9rem;
+    margin-bottom: 8px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  header p {
+    opacity: 0.95;
+    font-size: 1rem;
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    padding: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+    min-width: 1550px;
+  }
+
+  thead th {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    color: #f1f5f9;
+    padding: 15px 8px;
+    font-weight: 700;
+    text-align: right;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  thead th.invent-en {
+    background: linear-gradient(180deg, #7c2d12 0%, #431407 100%);
+    color: #fed7aa;
+  }
+
+  thead th.invent-fa {
+    background: linear-gradient(180deg, #831843 0%, #500724 100%);
+    color: #fbcfe8;
+  }
+
+  thead th:first-child { border-radius: 0 14px 0 0; }
+  thead th:last-child  { border-radius: 14px 0 0 0; }
+
+  tbody tr {
+    transition: background 0.2s ease, transform 0.12s ease;
+  }
+
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  tbody tr:hover {
+    background: #eef2ff;
+    transform: scale(1.003);
+    box-shadow: inset 0 0 0 1px #c7d2fe;
+  }
+
+  tbody td {
+    padding: 11px 8px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    color: #1e293b;
+    line-height: 1.65;
+  }
+
+  .num-cell {
+    text-align: center;
+    width: 45px;
+    font-weight: 800;
+  }
+
+  .num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #0f172a, #334155);
+    color: #facc15;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(15,23,42,0.35);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  .sym-cell {
+    text-align: center;
+    width: 55px;
+  }
+
+  .sym {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    border-radius: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.4);
+    user-select: all;
+  }
+
+  .en-name {
+    font-weight: 700;
+    color: #4f46e5;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .fa-name {
+    font-weight: 700;
+    color: #db2777;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .fa-equiv {
+    font-size: 0.83rem;
+    color: #0f766e;
+    font-weight: 600;
+  }
+
+  .fa-equiv .academy {
+    display: inline-block;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-size: 0.76rem;
+    margin-bottom: 3px;
+    white-space: nowrap;
+  }
+
+  .fa-equiv .common {
+    display: block;
+    color: #334155;
+    font-weight: 500;
+  }
+
+  .invent-en {
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .invent-en .badge-en {
+    display: inline-block;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    padding: 4px 11px;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(234,88,12,0.35);
+    letter-spacing: 0.2px;
+  }
+
+  .invent-en .badge-en.pair-open {
+    background: linear-gradient(135deg, #22c55e, #15803d);
+    box-shadow: 0 3px 10px rgba(21,128,61,0.35);
+  }
+
+  .invent-en .badge-en.pair-close {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    box-shadow: 0 3px 10px rgba(185,28,28,0.35);
+  }
+
+  .invent-fa {
+    font-weight: 800;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .invent-fa .badge-fa {
+    display: inline-block;
+    background: linear-gradient(135deg, #ec4899, #be185d);
+    color: #fff;
+    padding: 4px 11px;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(190,24,93,0.35);
+  }
+
+  .invent-fa .badge-fa.pair-open {
+    background: linear-gradient(135deg, #10b981, #047857);
+    box-shadow: 0 3px 10px rgba(4,120,87,0.35);
+  }
+
+  .invent-fa .badge-fa.pair-close {
+    background: linear-gradient(135deg, #f43f5e, #9f1239);
+    box-shadow: 0 3px 10px rgba(159,18,57,0.35);
+  }
+
+  .reason {
+    color: #475569;
+    font-size: 0.81rem;
+  }
+
+  .usage {
+    color: #b91c1c;
+    font-size: 0.81rem;
+  }
+
+  code {
+    background: #f1f5f9;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #be185d;
+    font-size: 0.8rem;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  footer {
+    padding: 18px 22px;
+    background: #f1f5f9;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+    line-height: 1.9;
+  }
+
+  footer .legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 8px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.35rem; }
+    table { font-size: 0.78rem; }
+    thead th, tbody td { padding: 8px 5px; }
+    .sym { width: 34px; height: 34px; font-size: 1.15rem; }
+    .num-badge { width: 24px; height: 24px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>⌨️ نام‌گذاری، معادل‌سازی و نام‌های ابتکاری کاراکترهای برنامه‌نویسی</h1>
+    <p>ترکیبی از نام‌های کوتاه و خوش‌تلفظ، معادل‌های فرهنگستان، برگردان‌های فنی و دو ستون نام ابتکاری بر پایه کاربرد در برنامه‌نویسی</p>
+  </header>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>نماد</th>
+          <th>نام انگلیسی</th>
+          <th>نام فارسی (آوانگاری)</th>
+          <th>معادل‌سازی فارسی</th>
+          <th class="invent-en">نام ابتکاری انگلیسی</th>
+          <th class="invent-fa">نام ابتکاری فارسی</th>
+          <th>دلیل نام‌گذاری</th>
+          <th>کاربرد اصلی</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num-cell"><span class="num-badge">1</span></td>
+          <td class="sym-cell"><span class="sym">!</span></td>
+          <td class="en-name">Bang</td>
+          <td class="fa-name">بَنگ</td>
+          <td class="fa-equiv">
+            <span class="academy">نشانهٔ عاطفی / ندا</span>
+            <span class="common">علامت تعجب</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Flip</span></td>
+          <td class="invent-fa"><span class="badge-fa">وارو</span></td>
+          <td class="reason">صدای انفجاری «بنگ». نام ابتکاری «Flip» چون مقدار منطقی را وارونه می‌کند؛ معادل فارسی «وارو».</td>
+          <td class="usage">عملگر NOT؛ اجرای تاریخچه در شل.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">2</span></td>
+          <td class="sym-cell"><span class="sym">@</span></td>
+          <td class="en-name">At</td>
+          <td class="fa-name">اَت</td>
+          <td class="fa-equiv">
+            <span class="academy">در / پهلوی</span>
+            <span class="common">ات‌ساین</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Hook</span></td>
+          <td class="invent-fa"><span class="badge-fa">قلاب</span></td>
+          <td class="reason">در دکوراتورها چیزی را به تابع «قلاب» می‌کند؛ فارسی «قلاب» این نقش را می‌رساند.</td>
+          <td class="usage">ایمیل، دکوراتور در پایتون، متغیر در برخی زبان‌ها.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">3</span></td>
+          <td class="sym-cell"><span class="sym">#</span></td>
+          <td class="en-name">Hash</td>
+          <td class="fa-name">هَش</td>
+          <td class="fa-equiv">
+            <span class="academy">هش / درهم‌ساز</span>
+            <span class="common">علامت شماره / هش</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Mute</span></td>
+          <td class="invent-fa"><span class="badge-fa">ساکت</span></td>
+          <td class="reason">خط را «ساکت» و غیرفعال می‌کند (کامنت). فارسی «ساکت» دقیقاً همین کارکرد را می‌رساند.</td>
+          <td class="usage">کامنت در پایتون/شل، ID در CSS، <code>#!</code>.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">4</span></td>
+          <td class="sym-cell"><span class="sym">$</span></td>
+          <td class="en-name">Cash</td>
+          <td class="fa-name">کَش</td>
+          <td class="fa-equiv">
+            <span class="academy">دلار</span>
+            <span class="common">علامت دلار</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Slot</span></td>
+          <td class="invent-fa"><span class="badge-fa">جایگاه</span></td>
+          <td class="reason">«Slot» یعنی شکافی که مقدار در آن قرار می‌گیرد؛ متغیر نیز جایگاه نگهداری مقدار است.</td>
+          <td class="usage">متغیر در شل، PHP، Perl.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">5</span></td>
+          <td class="sym-cell"><span class="sym">%</span></td>
+          <td class="en-name">Mod</td>
+          <td class="fa-name">ماد</td>
+          <td class="fa-equiv">
+            <span class="academy">درصد / پیمانه</span>
+            <span class="common">باقی‌مانده / مُد</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Rem</span></td>
+          <td class="invent-fa"><span class="badge-fa">مانده</span></td>
+          <td class="reason">«Rem» کوتاه‌شده‌ی Remainder (باقی‌مانده) است؛ فارسی «مانده» دقیقاً همان معنا را می‌رساند.</td>
+          <td class="usage">عملگر باقی‌مانده در تقسیم.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">6</span></td>
+          <td class="sym-cell"><span class="sym">^</span></td>
+          <td class="en-name">Caret</td>
+          <td class="fa-name">کَرِت</td>
+          <td class="fa-equiv">
+            <span class="academy">توان</span>
+            <span class="common">علامت توان / هشتک</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Pow</span></td>
+          <td class="invent-fa"><span class="badge-fa">توان</span></td>
+          <td class="reason">«Pow» کوتاه‌شده‌ی Power است؛ فارسی «توان» معادل دقیق ریاضی آن است.</td>
+          <td class="usage">XOR بیتی، ابتدای خط در Regex.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">7</span></td>
+          <td class="sym-cell"><span class="sym">&amp;</span></td>
+          <td class="en-name">Amp</td>
+          <td class="fa-name">اَمپ</td>
+          <td class="fa-equiv">
+            <span class="academy">و / آمپرسند</span>
+            <span class="common">علامت و / اند</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Both</span></td>
+          <td class="invent-fa"><span class="badge-fa">هردو</span></td>
+          <td class="reason">«Both» یعنی هر دو شرط باید برقرار باشند (AND)؛ فارسی «هردو» همین معنا را می‌رساند.</td>
+          <td class="usage">AND بیتی؛ اجرای پس‌زمینه در شل.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">8</span></td>
+          <td class="sym-cell"><span class="sym">*</span></td>
+          <td class="en-name">Star</td>
+          <td class="fa-name">اِستار</td>
+          <td class="fa-equiv">
+            <span class="academy">ستاره</span>
+            <span class="common">ستاره</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Times</span></td>
+          <td class="invent-fa"><span class="badge-fa">ضرب</span></td>
+          <td class="reason">«Times» عملگر ضرب را می‌رساند و تلفظ آن روان است؛ فارسی «ضرب» دقیق و کوتاه.</td>
+          <td class="usage">ضرب؛ تکرار در Regex.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">9</span></td>
+          <td class="sym-cell"><span class="sym">~</span></td>
+          <td class="en-name">Tilde</td>
+          <td class="fa-name">تیلد</td>
+          <td class="fa-equiv">
+            <span class="academy">مدک / موج</span>
+            <span class="common">تیلد / نقیض بیتی</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Nest</span></td>
+          <td class="invent-fa"><span class="badge-fa">لانه</span></td>
+          <td class="reason">«Nest» اشاره به پوشه خانه (Home) کاربر دارد؛ فارسی «لانه» استعاره‌ای آشنا برای خانه است.</td>
+          <td class="usage">پوشه خانه در شل؛ نقیض بیتی.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">10</span></td>
+          <td class="sym-cell"><span class="sym">|</span></td>
+          <td class="en-name">Pipe</td>
+          <td class="fa-name">پایپ</td>
+          <td class="fa-equiv">
+            <span class="academy">لوله / خط لوله</span>
+            <span class="common">پایپ / لوله</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Flow</span></td>
+          <td class="invent-fa"><span class="badge-fa">جریان</span></td>
+          <td class="reason">«Flow» جریان داده از یک دستور به دستور دیگر را می‌رساند؛ فارسی «جریان» همین تصویر را می‌سازد.</td>
+          <td class="usage">OR بیتی؛ اتصال دستورات در شل.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">11</span></td>
+          <td class="sym-cell"><span class="sym">\</span></td>
+          <td class="en-name">Backslash</td>
+          <td class="fa-name">بَک‌اِسلَش</td>
+          <td class="fa-equiv">
+            <span class="academy">خط اریب وارونه</span>
+            <span class="common">بک‌اسلش / فرار</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Esc</span></td>
+          <td class="invent-fa"><span class="badge-fa">گریز</span></td>
+          <td class="reason">«Esc» کوتاه‌شده‌ی Escape است؛ چون کاراکتر بعدی را از معنای عادی «فرار» می‌دهد. فارسی «گریز» کوتاه و گویاست.</td>
+          <td class="usage">Escape در رشته‌ها؛ مسیر فایل در ویندوز.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">12</span></td>
+          <td class="sym-cell"><span class="sym">/</span></td>
+          <td class="en-name">Slash</td>
+          <td class="fa-name">اِسلَش</td>
+          <td class="fa-equiv">
+            <span class="academy">خط اریب / ممیز</span>
+            <span class="common">اسلش / ممیز</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Path</span></td>
+          <td class="invent-fa"><span class="badge-fa">مسیر</span></td>
+          <td class="reason">در یونیکس جداکننده مسیر فایل است؛ «Path» و «مسیر» هر دو این نقش را می‌رسانند.</td>
+          <td class="usage">تقسیم؛ مسیر فایل در لینوکس؛ Regex.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">13</span></td>
+          <td class="sym-cell"><span class="sym">_</span></td>
+          <td class="en-name">Underscore</td>
+          <td class="fa-name">آندِر‌اِسکور</td>
+          <td class="fa-equiv">
+            <span class="academy">زیرخط</span>
+            <span class="common">آندرلاین / زیرخط</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Join</span></td>
+          <td class="invent-fa"><span class="badge-fa">پیوند</span></td>
+          <td class="reason">کلمات را در نام‌گذاری «به هم پیوند» می‌دهد؛ «Join» و «پیوند» دقیقاً همین نقش را می‌رسانند.</td>
+          <td class="usage">نام‌گذاری متغیر و تابع.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">14</span></td>
+          <td class="sym-cell"><span class="sym">.</span></td>
+          <td class="en-name">Dot</td>
+          <td class="fa-name">دات</td>
+          <td class="fa-equiv">
+            <span class="academy">نقطه</span>
+            <span class="common">نقطه</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Reach</span></td>
+          <td class="invent-fa"><span class="badge-fa">دسترسی</span></td>
+          <td class="reason">عملگر «دسترسی» به عضو یک شیء است؛ «Reach» و «دسترسی» این نقش را می‌رسانند.</td>
+          <td class="usage">دسترسی به عضو؛ هر کاراکتر در Regex.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">15</span></td>
+          <td class="sym-cell"><span class="sym">:</span></td>
+          <td class="en-name">Colon</td>
+          <td class="fa-name">کُلُن</td>
+          <td class="fa-equiv">
+            <span class="academy">دونقطه</span>
+            <span class="common">دونقطه</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Pair</span></td>
+          <td class="invent-fa"><span class="badge-fa">جفت</span></td>
+          <td class="reason">در دیکشنری «کلید: مقدار» را به هم «جفت» می‌کند؛ «Pair» و «جفت» همین نقش را می‌رسانند.</td>
+          <td class="usage">دیکشنری پایتون، برچسب، عملگر سه‌تایی.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">16</span></td>
+          <td class="sym-cell"><span class="sym">;</span></td>
+          <td class="en-name">Semi</td>
+          <td class="fa-name">سِمی</td>
+          <td class="fa-equiv">
+            <span class="academy">نقطه‌ویرگول</span>
+            <span class="common">نقطه‌ویرگول / سمی‌کالن</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Stop</span></td>
+          <td class="invent-fa"><span class="badge-fa">ایست</span></td>
+          <td class="reason">دستور را «متوقف» می‌کند؛ «Stop» و «ایست» هر دو کوتاه و رسا هستند.</td>
+          <td class="usage">پایان دستور در C، Java، JS.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">17</span></td>
+          <td class="sym-cell"><span class="sym">?</span></td>
+          <td class="en-name">Ques</td>
+          <td class="fa-name">کوئِس</td>
+          <td class="fa-equiv">
+            <span class="academy">علامت پرسش</span>
+            <span class="common">علامت سؤال</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Maybe</span></td>
+          <td class="invent-fa"><span class="badge-fa">شاید</span></td>
+          <td class="reason">در عملگر سه‌تایی، انتخاب بین دو حالت را «شاید» می‌کند؛ هر دو نام این ابهام کنترل‌شده را می‌رسانند.</td>
+          <td class="usage">عملگر سه‌تایی <code>?:</code>؛ نوع nullable.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">18</span></td>
+          <td class="sym-cell"><span class="sym">"</span></td>
+          <td class="en-name">Quote</td>
+          <td class="fa-name">کوُت</td>
+          <td class="fa-equiv">
+            <span class="academy">گیومه / نشانه نقل قول</span>
+            <span class="common">دابل‌کوتیشن / گیومه</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Text</span></td>
+          <td class="invent-fa"><span class="badge-fa">متن</span></td>
+          <td class="reason">رشته‌های متنی را در بر می‌گیرد؛ «Text» و «متن» مستقیماً به کارکرد اصلی اشاره دارند.</td>
+          <td class="usage">تعریف رشته (String).</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">19</span></td>
+          <td class="sym-cell"><span class="sym">'</span></td>
+          <td class="en-name">Tick</td>
+          <td class="fa-name">تیک</td>
+          <td class="fa-equiv">
+            <span class="academy">آپاستروف / تک‌گیومه</span>
+            <span class="common">سینگل‌کوتیشن / آپاستروف</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Char</span></td>
+          <td class="invent-fa"><span class="badge-fa">نویسه</span></td>
+          <td class="reason">«Char» کوتاه‌شده‌ی Character است که همین نماد برای آن به کار می‌رود؛ فارسی «نویسه» معادل دقیق آن.</td>
+          <td class="usage">تعریف کاراکتر یا رشته کوتاه.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">20</span></td>
+          <td class="sym-cell"><span class="sym">(</span></td>
+          <td class="en-name">Open</td>
+          <td class="fa-name">اُپِن</td>
+          <td class="fa-equiv">
+            <span class="academy">پرانتز باز</span>
+            <span class="common">پرانتز باز</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-open">Pack-Open</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-open">قوس‌باز</span></td>
+          <td class="reason">کوتاه‌شده‌ی Open parenthesis. نام ابتکاری «Pack-Open / قوس‌باز» از استعاره‌ی کمان باز برای گروه‌بندی؛ جفت بسته‌ی آن «Pack-Close / قوس‌بسته» است.</td>
+          <td class="usage">شروع گروه‌بندی، آرگومان، شرط.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">21</span></td>
+          <td class="sym-cell"><span class="sym">)</span></td>
+          <td class="en-name">Close</td>
+          <td class="fa-name">کِلُز</td>
+          <td class="fa-equiv">
+            <span class="academy">پرانتز بسته</span>
+            <span class="common">پرانتز بسته</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-close">Pack-Close</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-close">قوس‌بسته</span></td>
+          <td class="reason">کوتاه‌شده‌ی Close parenthesis. نام ابتکاری «Pack-Close / قوس‌بسته» جفتِ بسته‌ی «Pack-Open / قوس‌باز» و رساننده‌ی پایان گروه است.</td>
+          <td class="usage">پایان گروه‌بندی، آرگومان، شرط.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">22</span></td>
+          <td class="sym-cell"><span class="sym">[</span></td>
+          <td class="en-name">Bracket</td>
+          <td class="fa-name">بـراکِت</td>
+          <td class="fa-equiv">
+            <span class="academy">کروشه باز</span>
+            <span class="common">براکت باز / کروشه</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-open">List-Open</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-open">قاب‌باز</span></td>
+          <td class="reason">نام رایج و کوتاه. نام ابتکاری «List-Open / قاب‌باز» از استعاره‌ی قاب باز برای نگهداری فهرست؛ جفت بسته‌ی آن «List-Close / قاب‌بسته» است.</td>
+          <td class="usage">لیست و آرایه؛ دسترسی با ایندکس.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">23</span></td>
+          <td class="sym-cell"><span class="sym">]</span></td>
+          <td class="en-name">Bracket</td>
+          <td class="fa-name">بـراکِت</td>
+          <td class="fa-equiv">
+            <span class="academy">کروشه بسته</span>
+            <span class="common">براکت بسته / کروشه</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-close">List-Close</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-close">قاب‌بسته</span></td>
+          <td class="reason">همان بالا، برای براکت بسته. نام ابتکاری «List-Close / قاب‌بسته» جفتِ بسته‌ی «List-Open / قاب‌باز» و پایان فهرست است.</td>
+          <td class="usage">پایان لیست/آرایه.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">24</span></td>
+          <td class="sym-cell"><span class="sym">{</span></td>
+          <td class="en-name">Brace</td>
+          <td class="fa-name">بـرِیس</td>
+          <td class="fa-equiv">
+            <span class="academy">آکولاد باز</span>
+            <span class="common">آکولاد باز / بریس</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-open">Scope-Open</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-open">چتر‌باز</span></td>
+          <td class="reason">نام رایج (Curly brace). نام ابتکاری «Scope-Open / چتر‌باز» از استعاره‌ی چتر برای پوشش دامنه؛ جفت بسته‌ی آن «Scope-Close / چتر‌بسته» است.</td>
+          <td class="usage">بلوک کد، دیکشنری، مجموعه.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">25</span></td>
+          <td class="sym-cell"><span class="sym">}</span></td>
+          <td class="en-name">Brace</td>
+          <td class="fa-name">بـرِیس</td>
+          <td class="fa-equiv">
+            <span class="academy">آکولاد بسته</span>
+            <span class="common">آکولاد بسته / بریس</span>
+          </td>
+          <td class="invent-en"><span class="badge-en pair-close">Scope-Close</span></td>
+          <td class="invent-fa"><span class="badge-fa pair-close">چتر‌بسته</span></td>
+          <td class="reason">همان بالا، برای آکولاد بسته. نام ابتکاری «Scope-Close / چتر‌بسته» جفتِ بسته‌ی «Scope-Open / چتر‌باز» و پایان دامنه است.</td>
+          <td class="usage">پایان بلوک کد.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">26</span></td>
+          <td class="sym-cell"><span class="sym">&lt;</span></td>
+          <td class="en-name">Less</td>
+          <td class="fa-name">لِس</td>
+          <td class="fa-equiv">
+            <span class="academy">کوچک‌تر از</span>
+            <span class="common">کوچک‌تر از</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Low</span></td>
+          <td class="invent-fa"><span class="badge-fa">کم</span></td>
+          <td class="reason">«Low» و «کم» اشاره‌ای کوتاه و شاعرانه به کوچک‌تری دارند و در گفتار روزمره روان‌اند.</td>
+          <td class="usage">کوچک‌تری؛ باز کردن تگ HTML.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">27</span></td>
+          <td class="sym-cell"><span class="sym">&gt;</span></td>
+          <td class="en-name">Greater</td>
+          <td class="fa-name">گِرِیتِر</td>
+          <td class="fa-equiv">
+            <span class="academy">بزرگ‌تر از</span>
+            <span class="common">بزرگ‌تر از</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">High</span></td>
+          <td class="invent-fa"><span class="badge-fa">زیاد</span></td>
+          <td class="reason">«High» و «زیاد» جفت کوتاه «Low/کم» برای بزرگ‌تری هستند و تلفظشان بسیار ساده است.</td>
+          <td class="usage">بزرگ‌تری؛ بستن تگ HTML.</td>
+        </tr>
+        <tr>
+          <td class="num-cell"><span class="num-badge">28</span></td>
+          <td class="sym-cell"><span class="sym">`</span></td>
+          <td class="en-name">Backtick</td>
+          <td class="fa-name">بَک‌تیک</td>
+          <td class="fa-equiv">
+            <span class="academy">تک‌گیومه وارونه</span>
+            <span class="common">بک‌تیک / گراو</span>
+          </td>
+          <td class="invent-en"><span class="badge-en">Run</span></td>
+          <td class="invent-fa"><span class="badge-fa">اجرا</span></td>
+          <td class="reason">دستور داخل آن «اجرا» می‌شود (Command Substitution)؛ «Run» و «اجرا» این نقش زنده را می‌رسانند.</td>
+          <td class="usage">Command Substitution در شل؛ نقل‌قول شناسه در MySQL.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div class="legend">
+      <span class="dot" style="background:linear-gradient(135deg,#f97316,#ea580c);"></span>
+      <span>نام ابتکاری انگلیسی (بر پایه کاربرد)</span>
+    </div>
+    <div class="legend">
+      <span class="dot" style="background:linear-gradient(135deg,#ec4899,#be185d);"></span>
+      <span>نام ابتکاری فارسی (کوتاه و خوش‌بیان)</span>
+    </div>
+    <div class="legend">
+      <span class="dot" style="background:linear-gradient(135deg,#22c55e,#15803d);"></span>
+      <span>بازکننده (Open)</span>
+    </div>
+    <div class="legend">
+      <span class="dot" style="background:linear-gradient(135deg,#ef4444,#b91c1c);"></span>
+      <span>بسته‌کننده (Close)</span>
+    </div>
+    <br>
+    📌 برچسب <span style="background:#ecfdf5; color:#047857; padding:1px 6px; border-radius:4px;">سبز</span> در ستون معادل‌سازی = معادل مصوب/پیشنهادی فرهنگستان. — مجموعاً <strong>۲۸ کاراکتر</strong><br>
+    🔗 در جفت‌های <code>( )</code>، <code>[ ]</code> و <code>{ }</code>، نام ابتکاری با الگوی <strong>«پایه-Open» / «پایه-Close»</strong> و <strong>«پایه‌باز» / «پایه‌بسته»</strong> ساخته شده تا تعلق دو نماد به یک جفت، بی‌درنگ آشکار باشد.
+  </footer>
+</div>
+
+</body>
+</html>
